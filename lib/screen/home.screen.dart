@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taller_final/core/classes/category.class.dart';
 import 'package:taller_final/core/services/category.service.dart';
+import 'package:taller_final/screen/attachment.screen.dart';
 
 class CategoryListPage extends StatefulWidget {
   const CategoryListPage({Key? key}) : super(key: key);
@@ -40,15 +41,17 @@ class _CategoryListPageState extends State<CategoryListPage> {
               return ListView.builder(
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Acción al presionar el botón
-                        print('Button ${categories[index].name} pressed');
-                      },
-                      child: Text(categories[index].name),
-                    ),
+                  return ElevatedButton(
+                    onPressed: () {
+                      // Navegar a la pantalla de adjuntos con el ID de la categoría seleccionada
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AttachmentListPage(categoryId: categories[index].id),
+                        ),
+                      );
+                    },
+                    child: Text(categories[index].name),
                   );
                 },
               );
